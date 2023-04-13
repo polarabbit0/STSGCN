@@ -36,8 +36,7 @@ def construct_model(config):
     adj = mx.sym.Variable('adj', shape=adj_mx.shape,
                           init=mx.init.Constant(value=mx.nd.array(np.array(adj_mx.tolist()))))
     adj = mx.sym.BlockGrad(adj)
-    mask_init_value = mx.init.Constant(value=(adj_mx != 0)
-                                       .astype('float32').tolist())
+    mask_init_value = mx.init.Constant(value=mx.nd.array(np.array((adj_mx != 0).astype('float32'))))
 
     filters = config['filters']
     first_layer_embedding_size = config['first_layer_embedding_size']
